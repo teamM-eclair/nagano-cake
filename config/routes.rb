@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :customers
 admin-controller
   namespace :admin do
     root to: "admin/homes#top"
