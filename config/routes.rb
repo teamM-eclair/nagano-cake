@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :customers
-admin-controller
+  
   namespace :admin do
     root to: "admin/homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
@@ -34,7 +34,8 @@ admin-controller
   namespace :public do
     get 'homes/top'
     get 'homes/about'
-develop
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  end
+  
 end
