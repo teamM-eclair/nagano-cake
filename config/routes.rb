@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update]
     resources :order_details, only: [:update]
   end
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/develop
   namespace :public do
     root to: "homes#top"
     get "about" => "homes#about"
@@ -22,7 +25,10 @@ Rails.application.routes.draw do
         patch "out"
       end
     end
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/develop
     resources :items, only: [:index, :show]
 
     resources :orders, only: [:new, :create, :index, :show] do
