@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :customers
-  
+
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    sessions: "admins/sessions"
+  }
+
+  devise_for :customers,skip: [:passwords], controllers: {
+    registrations: "publics/registrations",
+    sessions: 'publics/sessions'
+  }
+
+  devise_scope :user do
+    get "sign_in", :to => "publics/sessions#new"
+    get "sign_out", :to => "publics/sessions#destroy"
+  end
+
+
   namespace :admin do
     root to: "admin/homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
@@ -10,7 +23,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update]
     resources :order_details, only: [:update]
   end
-  
+
   namespace :public do
     root to: "homes#top"
     get "about" => "homes#about"
@@ -22,7 +35,7 @@ Rails.application.routes.draw do
         patch "out"
       end
     end
-    
+
     resources :items, only: [:index, :show]
 
     resources :orders, only: [:new, :create, :index, :show] do
