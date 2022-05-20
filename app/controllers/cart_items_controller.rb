@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-before_action :correct_customer, only: [:new, :create]
+# before_action :correct_customer
 
   def create
     @cart_item = CartItem.new(cart_item_params)
@@ -45,9 +45,8 @@ private
     params.require(:cart_item).permit(:item_id, :amount)
   end
 
-  def correct_customer
-    @cart_item = Item.find(params[:id])
-    @customer = @cart_item.customer
-    redirect_to(new_customer_session_path) unless @customer == correct_customer
-  end
+  # def correct_customer
+  #   @customer = cart_item.customer
+  #   redirect_to(new_customer_session_path) unless @customer == correct_customer
+  # end
 end

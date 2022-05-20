@@ -3,7 +3,10 @@
 <% @items.each do |item| %>
 <div>
   <%= image_tag item.get_image %>
+  <%= link_to public_item_path(item.id) %>
   <p><%= item.item_name %></p>
   <p><%= item.item.unit_price %></p>
 </div>
 <% end %>
+
+<%= paginate(@item_pages) %>

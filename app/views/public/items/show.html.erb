@@ -1,8 +1,8 @@
 <!--商品詳細画面-->
-
-
-
-
+<%= image_tag @item.item.get_image(width, height) %>
+<h3><strong><%= @item.item_name %></strong></h3>
+<p><%= @item.item_detail %></p>
+<p><%= @item.unit_price %></p>
 
 <!--セレクトボックス-->
 <%= form_with model:cart_item,local:true do |f| %>
