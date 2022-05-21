@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     sessions: 'publics/sessions'
   }
 
-
   namespace :admin do
     root to: "admin/homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
@@ -43,7 +42,7 @@ Rails.application.routes.draw do
 
   resources :cart_items, only: [:index, :update, :create, :destroy] do
     collection do
-      delete "all_delete"
+      delete "all_destroy"
     end
   end
 
