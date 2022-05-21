@@ -2,11 +2,11 @@
 
 <h2>注文情報入力</h2>
 <h3>支払方法</h3>
-  <%= form_with model: @order do |f| %>
-    <!-- Orderモデルに定義した数値に対応した文字列の呼び出し -->
+  <%= form_with model:@order, url: new_public_order_path do |f| %> <!-- URLの確認必要 
+    <!-- Orderモデルに定義した数値に対応した文字列の呼び出し(なぽ) -->
     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-    <!-- config/locales/ja.ymlに定義した英語に対応した日本語の呼び出し-->
-    <%= f.label :payment_method, Oder.payment_methods_i18n[:credit_card] %>
+    <!-- config/locales/ja.ymlに定義した英語に対応した日本語の呼び出し(なぽ)-->
+    <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
     
     <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
     <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
@@ -14,7 +14,7 @@
   <h3>お届け先</h3>
     <%= f.radio_button :address, Order.addresses.key(0) %>
     <%= f.label :address, Order.addresses_i18n[:address] %>
-    <%= current_Customer.address %>
+    <%= @customer.postcode %>
     
     <%= f.radio_button :address, Order.addresses.key(1) %>
     <%= f.label :address, Order.addresses_i18n[:delivery_address] %>

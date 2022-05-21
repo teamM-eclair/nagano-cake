@@ -56,5 +56,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
-#enumの実装(20220519なぽ)
+#enumの実装(なぽ)
 gem "enum_help"
