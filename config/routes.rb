@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     sessions: 'publics/sessions'
   }
 
-
   namespace :admin do
     root to: "admin/homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
