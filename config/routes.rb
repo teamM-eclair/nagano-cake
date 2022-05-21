@@ -9,11 +9,6 @@ Rails.application.routes.draw do
     sessions: 'publics/sessions'
   }
 
-  devise_scope :user do
-    get "sign_in", :to => "publics/sessions#new"
-    get "sign_out", :to => "publics/sessions#destroy"
-  end
-
 
   namespace :admin do
     root to: "admin/homes#top"
