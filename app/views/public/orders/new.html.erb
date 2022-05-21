@@ -1,2 +1,36 @@
-<h2>注文情報入力画面</h2>
+<!-- 会員のヘッダー -->
+
+<h2>注文情報入力</h2>
 <h3>支払方法</h3>
+  <%= form_with model:@order, url: new_public_order_path do |f| %> <!-- URLの確認必要 
+    <!-- Orderモデルに定義した数値に対応した文字列の呼び出し(なぽ) -->
+    <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+    <!-- config/locales/ja.ymlに定義した英語に対応した日本語の呼び出し(なぽ)-->
+    <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+    
+    <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+    <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
+    
+  <h3>お届け先</h3>
+    <%= f.radio_button :address, Order.addresses.key(0) %>
+    <%= f.label :address, Order.addresses_i18n[:address] %>
+    <%= @customer.postcode %>
+    
+    <%= f.radio_button :address, Order.addresses.key(1) %>
+    <%= f.label :address, Order.addresses_i18n[:delivery_address] %>
+      <%= delivery.select :address_id, options_from_collection_for_select(Delivery.all, :id, :address_display) %> <!-- .allだとほかの人のも持ってきちゃう？ -->
+    
+    <%= f.radio_button :address, Order.address.key(2) %>
+    <%= f.label :address, Order.addresses_i18n[:new_address] %>
+      <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
+      <%= f.text_field :postcode %>
+        
+      <%= f.label :address, "住所" %>
+      <%= f.text_field :address %>
+      
+      <%= f.label :name, "宛名" %>
+      <%= f.text_field :name %>
+      
+    <%= f.submit "確認画面へ進む" %>
+      
+  <% end %>
