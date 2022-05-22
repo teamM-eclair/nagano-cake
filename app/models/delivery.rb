@@ -2,7 +2,7 @@ class Delivery < ApplicationRecord
 
   # アソシエーション
   belongs_to :customer
-  # バリデーション
+  # バリデーション未入力
   validates :postcode, presence: true
   validates :address, presence: true
 
