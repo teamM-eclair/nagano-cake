@@ -10,7 +10,7 @@ class Public::OrdersController < ApplicationController
     @order.address = current_customer.address
     @order.name = current_customer.first_name + current_cutomer.last_nam
   end
-  
+
   def create
     @order = Order.new(order_params)
     @order.save
@@ -21,13 +21,17 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.all
+    @order = Order.new
   end
 
   def show
+    @order = Order.find(params[:id])
+    @customer = current_customer
   end
-  
+
   private
-  
+
   def order_params
     params.require(:order).permit(:payment_method, :address, :postcode, :name)
   end
