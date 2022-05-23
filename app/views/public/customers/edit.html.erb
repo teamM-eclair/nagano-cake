@@ -1,2 +1,26 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<h1>会員情報編集</h1>
+<%= form_with model:@customer, url: edit_public_customer_path, local:true do |f| %>
+
+  <%= f.label :name, "名前" %>
+    <%= "(姓)" %><%= f.text_field :last_name, autofocus: true %>
+    <%= "(名)" %><%= f.text_field :first_name %><br>
+
+    <%= f.label :name_kana, "フリガナ" %>
+    <%= "(セイ)" %><%= f.text_field :last_name_kana %>
+    <%= "(メイ)" %><%= f.text_field :first_name_kana %><br>
+
+    <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
+    <%= f.text_field :postcode %><br>
+
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address %><br>
+
+    <%= f.label :phone_number, "電話番号(ハイフンなし)" %>
+    <%= f.telephone_field :phone_number %><br>
+
+    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.label :email, "メールアドレス" %><br>
+
+    <%= f.submit "編集を保存する"  %>
+    <%= link_to '退会する', quit_public_customers_path %>
+<% end %>
