@@ -4,8 +4,14 @@ ja: #日本語設定
       payment_method: #カラム名
        credit_card: "クレジットカード"
        transfer: "銀行振込"
-
-      address:
+       
+      address: #カラム名
        address: "ご自身の住所"
        delivery_address: "登録済み住所から選択"
        new_address: "新しいお届け先"
+       
+       
+    customer: #モデル名
+      status: #カラム名
+       register: "有効"
+       unregister: "退会"
