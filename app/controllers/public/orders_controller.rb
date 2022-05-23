@@ -18,7 +18,7 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.save
-    redirect_to thanx_public_orders_path
+    redirect_to confirm_public_orders
   end
 
   def thanx

@@ -2,7 +2,7 @@
 
 <h2>注文情報入力</h2>
 <h3>支払方法</h3>
-  <%= form_with model:@order, url: new_public_order_path do |f| %> <!-- URLの確認必要 
+  <%= form_with model:@order, url: confirm_public_orders_path do |f| %>
     <!-- Orderモデルに定義した数値に対応した文字列の呼び出し(なぽ) -->
     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
     <!-- config/locales/ja.ymlに定義した英語に対応した日本語の呼び出し(なぽ)-->
