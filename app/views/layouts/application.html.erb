@@ -11,6 +11,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+        <% if customer_sign_in? %>
+          <%= render 'layouts/header_customer' %>
+        <% elsif admin_sign_in? %>
+          <%= render 'layouts/header_admin' %>
+        <% else %>
+          <%= render 'layouts/header_logout' %>
+        <% end %>
+      <main>
+        <p id="notice"><%= notice %></p>
+        <%= yield %>
+      </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
