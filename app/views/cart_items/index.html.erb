@@ -1,5 +1,5 @@
 <h1>ショッピングカート</h1>
-<td><%= link_to 'カートを空にする', method: :delete, data: {'本当にカートを全て空にしますか？' }, class: "btn btn-sm btn-danger" %></td>
+<td><%= link_to 'カートを空にする', method: :delete, data: {confirm: '本当にカートを全て空にしますか？' }, class: "btn btn-sm btn-danger" %></td>
 <table>
   <thead>
     <th>商品名</th>
@@ -10,17 +10,17 @@
   </thead>
   <%= form_with model:cart_item,local:true do |f| %>
   <tbody>
-    <% @cart_item.each do |cart_item| %>
+    <% @cart_item.items.each do |item| %>
       <tr>
         <td>
-          <%= cart_item.item.get_image(width, height) %>
-          <%= cart_item.item.name %>
-          <%= f.hidden_field :name, :value => cart_item.item.name %>
+          <%= item.get_image(width, height) %>
+          <%= item.name %>
+          <%= f.hidden_field :name, :value => item.name %>
         </td>
         <!--単価（税込）-->
         <td>
-          <%= cart_item.item.with_tax_price %>
-          <%= f.hidden_field :with_tax_price, :value => cart_item.item.with_tax_price %>
+          <%= item.with_tax_price %>
+          <%= f.hidden_field :with_tax_price, :value => item.with_tax_price %>
         </td>
         <!--数量-->
         <td>
