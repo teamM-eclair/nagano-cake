@@ -6,19 +6,30 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params)
+    @order = Order.new(order_params)    
+    @cart_items = CartItem.all #.allだとすべてのカート内商品を呼び込んじゃう?
+    @customer = current_customer
+    
+    if params[:address] == 0
+      @order.postcode = @customer.postcode
+      @order.address = @customer.address
+      @order.name = @customer.name
+    elsif params[:address] == 1
+       = Delivery.find([:order][:address_id] )
+     [:order][:address_id] 
+    end
+      
     @order.postcode = current_customer.postcode
     @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_cutomer.last_name
-    bindinr.pry
-    @cart_items = CartItem.all
+    @order.name = current_customer.first_name + current_customer.last_name
+
     @price = item.unit_price * item.amount    
   end
 
   def create
     @order = Order.new(order_params)
     @order.save
-    redirect_to confirm_public_orders
+    redirect_to thanx_public_orders_path
   end
 
   def thanx
