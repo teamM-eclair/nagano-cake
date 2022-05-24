@@ -14,7 +14,7 @@
                     <tbody>
                     <tr>
                         <% @sum = 0 %>
-                        <% @cart_item.items.each do |item| %>
+                        <% @cart_items.each do |item| %>
                             <td>
                                 <%= image_tag item.get_image, size:"20x20" %>
                                 <%= item.name %>
