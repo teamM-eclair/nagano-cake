@@ -6,3 +6,5 @@
       <br>
       退会する場合は,「退会する」をクリックしてください。
   </p>
+   <%= link_to "退会しない", public_customer_customers_my_page_path(current_customer) %>
+   <%= link_to "退会する", out_public_customers_path, method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"} %>
