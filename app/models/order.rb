@@ -9,4 +9,11 @@ class Order < ApplicationRecord
   #enumにて配送先住所の数値と文字列の紐付け(なぽ)
   enum address: { address: 0, delivery_address: 1, new_address: 2 }
   
+  
+  
+  
+  def subtotal
+    item.with_tax_price * amount
+  end
+  
 end

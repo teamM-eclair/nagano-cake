@@ -21,7 +21,7 @@
     
     <%= f.radio_button :address, Order.addresses.key(1) %>
     <%= f.label :address, Order.addresses_i18n[:delivery_address] %><br>
-      <%= f.select :address_id, options_from_collection_for_select(@delivery, :id, :address_display) %> <!-- @delivery次第でほかの人の配送先も持ってきちゃう？ --><br>
+      <%= f.select :address_id, options_from_collection_for_select(@delivery, :id, :address_display) %><br>
     
     <%= f.radio_button :address, Order.addresses.key(2) %>
     <%= f.label :address, Order.addresses_i18n[:new_address] %><br>
