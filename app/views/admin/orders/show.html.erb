@@ -1,2 +1,80 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<h1>注文履歴詳細</h1>
+<div class="container">
+  <div class="row">
+    <table class="table table-striped" >
+      <div class="col-lg-1"></div>
+      <div class="col-lg-8">
+      <tr><strong>購入者</strong></tr>
+        <td><%= link_to admin_customers_path(@order.customer) do %>
+        <%= order.customer.name %>
+        <% end %></td>
+      <tr><strong>注文日</strong></tr>
+      <!--日付まで表示しないように変更する-->
+       <td><%= order[:created_at].strftime("%Y-%m-%d %H:%M") %></td>
+       p time.strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")
+
+        <td> <%= order.customer.created_at %></td>
+      <tr><strong>配送先</strong></tr>
+        <td><%= order.customer.oder_detail %></td>
+     <tr><strong>支払方法</strong></tr>
+      <%= order.customer.status %>
+     <tr><strong> 注文ステータス</strong></tr>
+      <!--注文ステータス セレクトボックス-->
+        <td><%= form_with model:order, local:true do |f| %>
+              <%= f.select :status, Order.statuses_i18n.invert %>
+              <%= f.submit '更新', class: "btn btn-sm btn-success" %>
+            <% end %></td>
+      </div>
+      <div class="col-lg-3"></div>
+    </table>
+  </div>
+</div>
+
+    <!--半分から下の表部分-->
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-6">
+      <table  table border="0" style='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th>商品名</th>
+                <th>単価（税込）</th>
+                <th>数量</th>
+                <th>小計</th>
+                <th>製作ステータス</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= form_with model:oder_detail, local:true do |f| %>
+                <%= f.fields_for :order_detail do |o| %>
+                  <% @order_detail.each do |order_detail| %>
+                    <tr>
+                      <td><%= order_detail.item.name %></td>
+                      <td><%= order_detail.item.unit_price %></td>
+                      <td><%= order_detail.item.amount %></td>
+                      <td><%= order_detail.item.with_tax_price %></td>
+                      <!--製作ステータス セレクトボックス-->
+                      <td><%= o.select :product_status, Order_detail.product_statuses_i18n.invert %></td>
+                      <td> <%= o.submit '更新', class: "btn btn-sm btn-success" %></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
+          <table class="table table-striped">
+            <tr><strong>商品合計</strong></tr>
+              <td><%= subtotal(@cart_items.sum(:with_tax_price)) %>円</td>
+            <tr><strong>送料</strong></tr>
+              <td><%= @order.shipping_fee %>円</td>
+            <tr><strong>請求金額合計</strong></tr>
+              <td><strong><%= subtotal(@cart_items.sum(:with_tax_price)) + @order.shipping_fee %>円</strong></td>
+          </table>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+
