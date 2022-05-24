@@ -25,4 +25,7 @@ class Item < ApplicationRecord
     (unit_price * 1.1).floor
   end
 
+  #enumにて販売ステータスと文字列の紐づけ(きむ)
+  enum sales_status: { sale: 0, sold: 1 }
+
 end
