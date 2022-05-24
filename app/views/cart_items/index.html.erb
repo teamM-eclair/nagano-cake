@@ -8,8 +8,9 @@
     <th>小計</th>
     <th></th>
   </thead>
-  <%= form_with model:cart_item,local:true do |f| %>
+
   <tbody>
+  <%= form_with model:@cart_item, local:true do |f| %>
     <% @cart_item.items.each do |item| %>
       <tr>
         <td>
