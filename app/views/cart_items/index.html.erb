@@ -11,7 +11,7 @@
 
   <tbody>
   <%= form_with model:@cart_item, local:true do |f| %>
-    <% @cart_item.items.each do |item| %>
+    <% @cart_items.items.each do |item| %>
       <tr>
         <td>
           <%= item.get_image(width, height) %>

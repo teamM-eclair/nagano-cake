@@ -41,7 +41,7 @@
             <td><%= delivery.postcode %></td>
             <td><%= delivery.address %></td>
             <td><%= delivery.name %></td>
-            <td><%= link_to '編集する', edit_delivery_path(@deliveries), class: "btn btn-sm btn-success edit_delivery_#{@delivery.id}" %></td>
+            <td><%= link_to '編集する', edit_delivery_path(@deliveries), class: "btn btn-sm btn-success edit_book_#{@delivery.id}" %></td>
             <td><%= link_to '削除する', delivery, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger destroy_delivery_#{@delivery.id}" %></td>
           </tr>
         <% end %>
