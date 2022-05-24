@@ -19,6 +19,9 @@
                                 <%= image_tag item.get_image, size:"20x20" %>
                                 <%= item.name %>
                             </td>
+                            <td><%= item.unit_price %></td>
+                            <td><%= item.amount %></td>
+                            <td><%= item. %></td>
                             <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
                             <td><%= item.with_tax_price %></td> 
                             <% @cart_items.each do |cart_item| %>
