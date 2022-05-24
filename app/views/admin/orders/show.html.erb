@@ -1,7 +1,7 @@
 <h1>注文履歴詳細</h1>
 <div class="container">
   <div class="row">
-    <table class="table table-striped" >
+    <table class="table table-striped">
       <div class="col-lg-1"></div>
       <div class="col-lg-8">
       <tr><strong>購入者</strong></tr>
@@ -15,7 +15,7 @@
 
         <td> <%= order.customer.created_at %></td>
       <tr><strong>配送先</strong></tr>
-        <td><%= order.customer.oder_detail %></td>
+        <td><%= order.customer.order_detail %></td>
      <tr><strong>支払方法</strong></tr>
       <%= order.customer.status %>
      <tr><strong> 注文ステータス</strong></tr>
@@ -48,15 +48,15 @@
             <tbody>
               <%= form_with model:order_detail, local:true do |f| %>
                 <%= f.fields_for :order_detail do |o| %>
-                  <% @order_detail.each do |order_detail| %>
+                  <% @order_detail.items.each do |item| %>
                     <tr>
-                      <td><%= order_detail.item.name %></td>
-                      <td><%= order_detail.item.unit_price %></td>
-                      <td><%= order_detail.item.amount %></td>
-                      <td><%= order_detail.item.with_tax_price %></td>
+                      <td><%= item.name %></td>
+                      <td><%= item.unit_price %></td>
+                      <td><%= item.amount %></td>
+                      <td><%= item.with_tax_price %></td>
                       <!--製作ステータス セレクトボックス-->
                       <td><%= o.select :product_status, Order_detail.product_statuses_i18n.invert %></td>
-                      <td> <%= o.submit '更新', class: "btn btn-sm btn-success" %></td>
+                      <td><%= o.submit '更新', class: "btn btn-sm btn-success" %></td>
                     </tr>
                   <% end %>
                 <% end %>
