@@ -7,22 +7,21 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)    
-    binding.pry
     @cart_items = CartItem.all #.allだとすべてのカート内商品を呼び込んじゃう?
-    @customer = corrent_customer
+    @customer = current_customer
     
     if params[:address] == 0
       @order.postcode = @customer.postcode
       @order.address = @customer.address
       @order.name = @customer.name
-    elif params[:address] == 1
+    elsif params[:address] == 1
        = Delivery.find([:order][:address_id] )
      [:order][:address_id] 
     end
       
     @order.postcode = current_customer.postcode
     @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_cutomer.last_name
+    @order.name = current_customer.first_name + current_customer.last_name
 
     @price = item.unit_price * item.amount    
   end
