@@ -15,9 +15,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @genres.each do |genres| %>
+    <% @genres.each do |genre| %>
       <tr>
-        <td><%= genles.name %></td>
+        <td><%= genre.name %></td>
         <td><%= link_to '編集する', edit_admin_genre_path(@genre), class: "btn btn-sm btn-success edit_genle_#{@genle.id}" %></td>
       </tr>
     <% end %>
