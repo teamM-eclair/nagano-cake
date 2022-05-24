@@ -46,7 +46,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= form_with model:oder_detail, local:true do |f| %>
+              <%= form_with model:order_detail, local:true do |f| %>
                 <%= f.fields_for :order_detail do |o| %>
                   <% @order_detail.each do |order_detail| %>
                     <tr>
