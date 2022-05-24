@@ -1,14 +1,13 @@
 <!--商品詳細画面-->
-<!--この場所でいいか？-->
-<%= form_with model:cart_item,local:true do |f| %>
-  <%= f.hidden_field :item_id %>
   <%= image_tag @item.item.get_image(width, height) %>
   <h3><strong><%= @item.name %></strong></h3>
   <p><%= @item.detail %></p>
   <p><%= @item.unit_price %></p>
 
-  <!--セレクトボックス-->
-  <%= f.select :amount, *[1..5] %>
-  <%= f.submit 'カートに入れる', class: "btn btn-sm btn-success" %>
-<% end %>
+  <%= form_with model:cart_item,local:true do |f| %>
+    <%= f.hidden_field :item_id %>
+    <!--セレクトボックス-->
+    <%= f.select :amount, *[1..5] %>
+    <%= f.submit 'カートに入れる', class: "btn btn-sm btn-success" %>
+  <% end %>
 
