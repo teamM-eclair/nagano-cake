@@ -2,26 +2,34 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <table>
+            <table class='table table-hover table-inverse'>
                 <thead>
                     <tr>
                         <th>商品名</th>
-                        <th>単価(税込み)</th>
+                        <th>単価(税込)</th>
                         <th>数量</th>
                         <th>小計</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
-                        <%= cart_items.each do |item| %>
+                        <% @sum = 0 %>
+                        <% @cart_item.items.each do |item| %>
                             <td>
-                                <%= image_tag item.item.get_image, size:"20x20" %>
+                                <%= image_tag item.get_image, size:"20x20" %>
                                 <%= item.name %>
                             </td>
-                            <td><%= item.unit_price %></td>
-                            <td><%= item.amount %></td>
-                            <td><%= item. %></td>
-                        <%= end %>
+                            <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
+                            <td><%= item.with_tax_price %></td> 
+                            <% @cart_items.each do |cart_item| %>
+                                <td><%= cart_item.amount %></td>
+                            <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
+                                <td><%= cart_item.subtotal %></td>
+                            <% end %>
+                        <% end %>
+                        <% @sum += @cart_items.subtotal %> <!-- 要確認 -->
                     </tr>
-                </thead>
+                </tbody>
             </table>
         </div>
         <div class="col-md-3 offset-md-1">
@@ -29,18 +37,23 @@
                 <tbody>
                     <tr>
                         <td>送料</td>
-                        <td></td>
+                        <td>"800"</td>
                     </tr>
                     <tr>
                         <td>商品合計</td>
-                        <td></td>
+                        <td><%= @sum %></td>
                     </tr>
                     <tr>
                         <td>請求金額</td>
-                        <td></td>
+                        <td><%= 800 + @sum %></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+        <h3>支払方法</h3>
+            <%= Order.payment_method_i18n[:credit_card] %>
+        <h3>お届け先</h3>
     </div>
 </div>

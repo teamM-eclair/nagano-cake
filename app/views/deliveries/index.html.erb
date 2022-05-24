@@ -2,10 +2,12 @@
 
 <!--ヘッダー追記-->
 
-<div class='container px-5 px-sm-0'>
+<div class='container px-5 px-sm-0 '>
     <div class='row'>
-        <h2>配送先登録 / 一覧</h2>
-        <%= form_with model:delivery, local:true do |f| %>
+        <h3>配送先登録 / 一覧</h3>
+    </div>
+    <div class='row'>
+        <%= form_with model:@delivery, local:true do |f| %>
           <div class="form-group">
               <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
               <%= f.text_field :postcode %>
@@ -21,7 +23,7 @@
           <div class="form-group">
               <%= f.submit '新規登録', class: "btn btn-success" %>
           </div>
-         <% end %>
+        <% end %>
     </div>
 
     <table class='table table-hover table-inverse'>
@@ -42,6 +44,7 @@
             <td><%= link_to '編集する', edit_delivery_path(@delivery), class: "btn btn-sm btn-success edit_book_#{@delivery.id}" %></td>
             <td><%= link_to '削除する', @delivery, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger destroy_delivery_#{@delivery.id}" %></td>
           </tr>
+        <% end %>
       </tbody>
     </table>
 </div>
