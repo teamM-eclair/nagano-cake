@@ -1,5 +1,5 @@
 <h1>ショッピングカート</h1>
-<td><%= link_to 'カートを空にする', method: :delete, data: {'本当にカートを全て空にしますか？' } %></td>
+<td><%= link_to 'カートを空にする', method: :delete, data: {confirm: '本当にカートを全て空にしますか？' }, class: "btn btn-sm btn-danger" %></td>
 <table>
   <thead><!-- <tr></tr>必要では？ -->
     <th>商品名</th>
@@ -8,26 +8,36 @@
     <th>小計</th>
     <th></th>
   </thead>
+  <%= form_with model:cart_item,local:true do |f| %>
   <tbody>
-    <% @cart_item.each do |cart_item| %>
+    <% @cart_item.items.each do |item| %>
       <tr>
         <td>
-          <%= cart_item.item.get_image(width, height) %>
-          <%= cart_item.item.item_name %>
+          <%= item.get_image(width, height) %>
+          <%= item.name %>
+          <%= f.hidden_field :name, :value => item.name %>
         </td>
-        <td><%= cart_item.item.with_tax_price %></td>
+        <!--単価（税込）-->
         <td>
-          <%= form_with model:cart_item,local:true do |f| %>
-            <%= f.hidden_field :amount, :value => cart_item.amount %>
-            <%= f.select :amount, *[1..5] %>
-            <%= f.submit '変更' %>
-          <% end %>
+          <%= item.with_tax_price %>
+          <%= f.hidden_field :with_tax_price, :value => item.with_tax_price %>
         </td>
-        <td><%= cart_item.subtotal %></td>
-        <td><%= link_to '削除する', @cart_item, method: :destroy %></td>
+        <!--数量-->
+        <td>
+            <%= f.select :amount, *[1..5] %>
+            <%= f.submit '変更', class: "btn btn-sm btn-success" %>
+        </td>
+        <!--小計 -->
+        <td>
+          <%= cart_item.subtotal %>
+        </td>
+        <!--削除ボタン-->
+        <td><%= link_to '削除する', @cart_item, method: :destroy, class: "btn btn-sm btn-danger" %></td>
+        <!--合計金額をインスタンス変数（@total）に入れてます-->
         <% @total += cart_item.subtotal %>
-      </tr>
     <% end %>
+      </tr>
+  <% end %>
   </tbody>
 </table>
 <%= link_to '買い物を続ける', public_items_path(@customer) %>
@@ -36,6 +46,7 @@
     <th>合計金額</th>
   </thead>
   <tbody>
+    <!--ここで合計金額を表示させます-->
     <td><%= @total %></td>
   </tbody>
 </table>
