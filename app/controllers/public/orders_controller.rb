@@ -2,7 +2,7 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
-    @delivery = Delivery.all #find(current_customer.id)
+    @delivery = current_customer.deliveries
   end
 
   def confirm
