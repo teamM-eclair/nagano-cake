@@ -1,5 +1,6 @@
 <h1>会員情報編集</h1>
-<%= form_with model:@customer, url: public_customer_customers_my_page_path(current_customer), local:true do |f| %>
+<%= render 'layouts/errors', obj: @customer %>
+<%= form_with model:@customer, url: public_customer_path(current_customer), local:true do |f| %>
 
   <%= f.label :name, "名前" %>
     <%= "(姓)" %><%= f.text_field :last_name, autofocus: true %>

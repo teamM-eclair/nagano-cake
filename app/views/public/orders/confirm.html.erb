@@ -12,22 +12,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+
                         <% @sum = 0 %>
-                        <% @cart_items.each do |item| %>
+                        <% @cart_items.each do |cart_item| %>
+                    <tr>
                             <td>
-                                <%= image_tag item.get_image, size:"20x20" %>
-                                <%= item.name %>
+                                <%= image_tag cart_item.item.get_image(20,20) %>
+                                <%= cart_item.item.name %>
                             </td>
                             <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
-                            <td><%= item.with_tax_price %></td> 
-                            <% @cart_items.each do |cart_item| %>
+                            <td><%= cart_item.item.with_tax_price %></td>
                                 <td><%= cart_item.amount %></td>
                             <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
                                 <td><%= cart_item.subtotal %></td>
-                            <% end %>
+                            <% @sum += cart_item.subtotal %> <!-- 要確認 -->
                         <% end %>
-                        <% @sum += @cart_items.subtotal %> <!-- 要確認 -->
                     </tr>
                 </tbody>
             </table>
@@ -37,7 +36,7 @@
                 <tbody>
                     <tr>
                         <td>送料</td>
-                        <td>"800"</td>
+                        <td>800</td>
                     </tr>
                     <tr>
                         <td>商品合計</td>
@@ -51,9 +50,12 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <h3>支払方法</h3>
-            <%= Order.payment_method_i18n[:credit_card] %>
-        <h3>お届け先</h3>
-    </div>
+    <!--<div class="row">-->
+    <!--    <h3>支払方法</h3>-->
+    <!--        <= Order.payment_method_i18n[:credit_card] %>-->
+    <!--    <h3>お届け先</h3>-->
+    <!--</div>-->
 </div>
+    <%= form_with model:@order,url: thanx_public_orders_path do |f| %>
+        <%= f.submit "注文を確定する" %>
+    <% end %>
