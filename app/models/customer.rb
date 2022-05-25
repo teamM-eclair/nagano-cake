@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
 
   validates :email,
     uniqueness: true
-  
+
   enum status: { register: 0, unregister: 1 }
 
 end
