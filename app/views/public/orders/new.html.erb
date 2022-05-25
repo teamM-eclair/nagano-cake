@@ -1,7 +1,7 @@
 <!-- 会員のヘッダー -->
 
-<h2>注文情報入力</h2>
-<h3>支払方法</h3>
+<h2>注文情報入力<h2>
+<p><strong>支払方法</strong><p>
   <%= form_with model:@order, url: confirm_public_orders_path do |f| %>
     <!-- Orderモデルに定義した数値に対応した文字列の呼び出し(なぽ) -->
     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
@@ -11,7 +11,7 @@
     <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
     <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
     
-  <h3>お届け先</h3>
+  <p><strong>お届け先</strong><p>
     <%= f.radio_button :address, Order.addresses.key(0) %>
     <%= f.label :address, Order.addresses_i18n[:address] %><br>
     <%= @customer.postcode %>

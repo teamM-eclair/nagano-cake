@@ -7,7 +7,6 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    binding.pry
     @cart_items = current_customer.cart_items
     @customer = current_customer
     
@@ -19,17 +18,17 @@ class Public::OrdersController < ApplicationController
     end
     
     # お届け先
-    if params[:order][:address] == 0
-      @order.postcode = @customer.postcode
-      @order.address = @customer.address
-      @order.name = @customer.name
-    elsif params[:address] == 1
-      Delivery.find([:order][:address_id] )
-      [:order][:address_id]
-    else #新規配送先の場合
+    # if params[:order][:address] == 0
+    #   @order.postcode = @customer.postcode
+    #   @order.address = @customer.address
+    #   @order.name = @customer.name
+    # elsif params[:address] == 1
+    #   Delivery.find([:order][:address_id] )
+    #   [:order][:address_id]
+    # else #新規配送先の場合
       
     
-    end
+    # end
 
     # @order.postcode = current_customer.postcode
     # @order.address = current_customer.address
