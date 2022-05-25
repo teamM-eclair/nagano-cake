@@ -8,6 +8,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
+    
   end
 
   def show
