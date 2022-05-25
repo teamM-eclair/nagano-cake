@@ -17,9 +17,7 @@
             <td><%= item.id %></td>
             <td><%= item.name %></td>
             <td><%= item.unit_price.to_s(:delimited) %></td>
-            <td>
-                <%= item.genre.name %>
-            </td>
+            <td><%= item.genre.name %></td>
             <td><%= item.sales_status %></td>
           </tr>
         <% end %>
