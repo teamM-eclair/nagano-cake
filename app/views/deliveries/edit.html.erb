@@ -7,7 +7,7 @@
       <h2>配送先編集</h2>
     </div>
     <div class="row">
-        <%= form_with model:@delivery, url: edit_delivery_path, local:true do |f| %>
+        <%= form_with model:@delivery, url: delivery_path(@delivery.id), local:true do |f| %>
           <div class="form-group">
               <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
               <%= f.text_field :postcode %>
