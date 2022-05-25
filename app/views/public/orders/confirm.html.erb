@@ -12,21 +12,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    
-                    <% @sum = 0 %>
-                    <% @cart_items.each do |cart_item| %>
+
+                        <% @sum = 0 %>
+                        <% @cart_items.each do |cart_item| %>
                     <tr>
-                        <td>
-                            <%= image_tag cart_item.item.get_image(50,50) %>
-                            <%= cart_item.item.name %>
-                        </td>
-                        <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
-                        <td><%= cart_item.item.with_tax_price %></td> 
-                        <td><%= cart_item.amount %></td>
-                        <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
-                        <td><%= cart_item.subtotal %></td>
-                        <% @sum += cart_item.subtotal %>   
-                    <% end %>
+                            <td>
+                                <%= image_tag cart_item.item.get_image(20,20) %>
+                                <%= cart_item.item.name %>
+                            </td>
+                            <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
+                            <td><%= cart_item.item.with_tax_price %></td>
+                                <td><%= cart_item.amount %></td>
+                            <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
+                                <td><%= cart_item.subtotal %></td>
+                            <% @sum += cart_item.subtotal %> <!-- 要確認 -->
+                        <% end %>
                     </tr>
                 </tbody>
             </table>

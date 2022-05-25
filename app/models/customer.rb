@@ -8,9 +8,6 @@ class Customer < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
-  validates :password,
-    length: { minimum: 6 }
-
   validates :email,
     uniqueness: true
   

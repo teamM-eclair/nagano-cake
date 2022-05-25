@@ -11,8 +11,6 @@
   </head>
 
   <body>
-    <header class="navbar navbar-fixed-top">
-      <div class="container">
         <% if customer_signed_in? %>
           <%= render 'layouts/header_customer' %>
         <% elsif admin_signed_in? %>
@@ -20,8 +18,6 @@
         <% else %>
           <%= render 'layouts/header_logout' %>
         <% end %>
-      </div>
-    </header>
       <main>
         <p id="notice"><%= notice %></p>
         <%= yield %>
