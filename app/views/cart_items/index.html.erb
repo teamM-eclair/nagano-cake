@@ -10,24 +10,29 @@
   </thead>
 
   <tbody>
-  <%= form_with model:@cart_item, local:true do |f| %>
-    <% @cart_items.items.each do |item| %>
+   <% @total = 0 %>
+    <% @cart_items.each do |cart_item| %>
+
       <tr>
         <td>
-          <%= item.get_image(width, height) %>
-          <%= item.name %>
-          <%= f.hidden_field :name, :value => item.name %>
+          <%= image_tag cart_item.item.get_image(100, 100) %> <!--   has_one_attached :imageがカラム代わりになる -->
+          <%= cart_item.item.name %><!-- カートアイテムの中のアイテムモデルから名前を引っ張る -->
+          <!-- f.hidden_field :name, :value => cart_item.name いらない -->
         </td>
         <!--単価（税込）-->
         <td>
-          <%= item.with_tax_price %>
-          <%= f.hidden_field :with_tax_price, :value => item.with_tax_price %>
+          <%= cart_item.item.with_tax_price %>
+          <!-- f.hidden_field :with_tax_price, :value => item.with_tax_price -->
         </td>
         <!--数量-->
+
         <td>
+        <%= form_with model:@cart_item, local:true do |f| %>
             <%= f.select :amount, *[1..5] %>
             <%= f.submit '変更', class: "btn btn-sm btn-success" %>
+        <% end %>
         </td>
+
         <!--小計 -->
         <td>
           <%= cart_item.subtotal %>
@@ -37,8 +42,9 @@
         <!--合計金額をインスタンス変数（@total）に入れてます-->
         <% @total += cart_item.subtotal %>
     <% end %>
+
       </tr>
-  <% end %>
+
   </tbody>
 </table>
 <%= link_to '買い物を続ける', public_items_path(@customer) %>
