@@ -8,20 +8,19 @@ class CartItemsController < ApplicationController
       redirect_to cart_items_path
     else
       @customer = Customer.find(current_customer.id)
-      redirect_to public_item_path
+      redirect_to public_item_path(@cart_item.item_id)
     end
   end
 
   def index
     @cart_items = current_customer.cart_items
-    @cart_item = CartItem.new
     @customer = current_customer.id
   end
 
   def update
     @cart_items = CartItem.find(current_customer.id)
     if @cart_items.update(cart_item_params)
-      redirect_to new_public_order_path
+      redirect_to cart_items_path
     else
       @cart_item = CartItem.all
       @customer = current_customer.id
