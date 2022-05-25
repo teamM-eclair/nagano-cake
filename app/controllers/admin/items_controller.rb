@@ -8,7 +8,6 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
-    
   end
 
   def show
@@ -17,12 +16,21 @@ class Admin::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @genre = Genre.all
   end
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item.params)
+    if @item.update(item_params)
       redirect_to admin_item_path
+    else
+      render "edit"
     end
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:name, :detail, :genre_id, :unit_price, :sales_status, :image )
   end
 end
