@@ -7,28 +7,47 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @cart_items = CartItem.all #.allだとすべてのカート内商品を呼び込んじゃう?
+    @cart_items = current_customer.cart_items
     @customer = current_customer
-
-    # if params[:address] == 0
-    #   @order.postcode = @customer.postcode
-    #   @order.address = @customer.address
-    #   @order.name = @customer.name
-    # elsif params[:address] == 1
-    #   Delivery.find([:order][:address_id] )
-    # [:order][:address_id]
+    
+    # 支払方法---いらない---------------------------------
+    # if params[:order][:payment_method] == "credit_card"
+    #   @payment_method = Order.payment_methods.key(0)
+    # else
+    #   @paymentmethod = Order.payment_methods.key(1)
+    # end
+    
+    # お届け先
+    if params[:order][:shipping_address] == "0"
+      @order.postcode = @customer.postcode
+      @order.address = @customer.address
+      @order.name = @customer.name
+    elsif params[:order][:shipping_address] == "1"
+      @delivery = Delivery.find([:order][:address_id])
+      @order.postcode = @derivery.postcode
+      @order.address = @delivery.address
+      @order.name = @delivery.name
+    end
+    #新規配送先の場合
+      
+    
     # end
 
     # @order.postcode = current_customer.postcode
     # @order.address = current_customer.address
     # @order.name = current_customer.first_name + current_customer.last_name
 
-    # @price = item.unit_price * item.amount
+
   end
 
   def create
     @order = Order.new(order_params)
+    # Orderモデルに注文を保存
+    # OrderDetailモデルにカート内商品の情報をもとに保存
     @order.save
+    .save
+    # カート内商品をすべ削除
+    # 購入画面に遷移
     redirect_to thanx_public_orders_path
   end
 
