@@ -1,38 +1,32 @@
 <h1>ショッピングカート</h1>
-<td><%= link_to 'カートを空にする', method: :delete, data: {confirm: '本当にカートを全て空にしますか？' }, class: "btn btn-sm btn-danger" %></td>
+<td><%= link_to 'カートを空にする', method: :delete, data: {'本当にカートを全て空にしますか？' }, class: "btn btn-sm btn-danger" %></td>
 <table>
-  <thead><!-- <tr></tr>必要では？ -->
+  <thead>
     <th>商品名</th>
     <th>単価(税込)</th>
     <th>数量</th>
     <th>小計</th>
     <th></th>
   </thead>
-
+  <%= form_with model:cart_item,local:true do |f| %>
   <tbody>
-   <% @total = 0 %>
-    <% @cart_items.each do |cart_item| %>
-    
+    <% @cart_item.each do |cart_item| %>
       <tr>
         <td>
-          <%= image_tag cart_item.item.get_image(100, 100) %> <!--   has_one_attached :imageがカラム代わりになる -->
-          <%= cart_item.item.name %><!-- カートアイテムの中のアイテムモデルから名前を引っ張る -->
-          <!-- f.hidden_field :name, :value => cart_item.name いらない -->
+          <%= cart_item.item.get_image(width, height) %>
+          <%= cart_item.item.name %>
+          <%= f.hidden_field :name, :value => cart_item.item.name %>
         </td>
         <!--単価（税込）-->
         <td>
           <%= cart_item.item.with_tax_price %>
-          <!-- f.hidden_field :with_tax_price, :value => item.with_tax_price -->
+          <%= f.hidden_field :with_tax_price, :value => cart_item.item.with_tax_price %>
         </td>
         <!--数量-->
-               
         <td>
-        <%= form_with model:@cart_item, local:true do |f| %>   
             <%= f.select :amount, *[1..5] %>
             <%= f.submit '変更', class: "btn btn-sm btn-success" %>
-        <% end %>    
         </td>
-               
         <!--小計 -->
         <td>
           <%= cart_item.subtotal %>
@@ -42,9 +36,8 @@
         <!--合計金額をインスタンス変数（@total）に入れてます-->
         <% @total += cart_item.subtotal %>
     <% end %>
-    
       </tr>
-
+  <% end %>
   </tbody>
 </table>
 <%= link_to '買い物を続ける', public_items_path(@customer) %>
