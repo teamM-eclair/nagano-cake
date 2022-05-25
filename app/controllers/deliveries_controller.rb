@@ -2,7 +2,7 @@ class DeliveriesController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    @deliveries = Delivery.all
+    @deliveries = current_customer.deliveries
     @delivery = Delivery.new
   end
 

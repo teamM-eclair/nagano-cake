@@ -13,7 +13,8 @@ class CartItemsController < ApplicationController
   end
 
   def index
-    @cart_item = CartItem.all
+    @cart_items = current_customer.cart_items
+    @cart_item = CartItem.new
     @customer = current_customer.id
   end
 
