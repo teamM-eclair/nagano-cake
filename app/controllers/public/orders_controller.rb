@@ -10,22 +10,25 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items
     @customer = current_customer
     
-    # 支払方法
-    if params[:order][:payment_method] == "credit_card"
-      @payment_method = Order.payment_methods.key(0)
-    else
-      @paymentmethod = Order.payment_methods.key(1)
-    end
+    # 支払方法---いらない---------------------------------
+    # if params[:order][:payment_method] == "credit_card"
+    #   @payment_method = Order.payment_methods.key(0)
+    # else
+    #   @paymentmethod = Order.payment_methods.key(1)
+    # end
     
     # お届け先
-    # if params[:order][:address] == 0
-    #   @order.postcode = @customer.postcode
-    #   @order.address = @customer.address
-    #   @order.name = @customer.name
-    # elsif params[:address] == 1
-    #   Delivery.find([:order][:address_id] )
-    #   [:order][:address_id]
-    # else #新規配送先の場合
+    if params[:order][:shipping_address] == "0"
+      @order.postcode = @customer.postcode
+      @order.address = @customer.address
+      @order.name = @customer.name
+    elsif params[:order][:shipping_address] == "1"
+      @delivery = Delivery.find([:order][:address_id])
+      @order.postcode = @derivery.postcode
+      @order.address = @delivery.address
+      @order.name = @delivery.name
+    end
+    #新規配送先の場合
       
     
     # end
@@ -42,6 +45,7 @@ class Public::OrdersController < ApplicationController
     # Orderモデルに注文を保存
     # OrderDetailモデルにカート内商品の情報をもとに保存
     @order.save
+    .save
     # カート内商品をすべ削除
     # 購入画面に遷移
     redirect_to thanx_public_orders_path
