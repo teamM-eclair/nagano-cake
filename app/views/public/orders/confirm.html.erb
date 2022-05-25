@@ -1,4 +1,5 @@
-<h1>注文情報確認</h1>
+<h2>注文情報確認</h2>
+<%= form_with model:@order, url: public_orders_path do |f| %>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -12,7 +13,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
                         <% @sum = 0 %>
                         <% @cart_items.each do |cart_item| %>
                     <tr>
@@ -45,19 +45,32 @@
                     <tr>
                         <td>請求金額</td>
                         <td><%= 800 + @sum %></td>
+                        <% f.hidden_field :bill, :value => 800 + @sum %>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row">
-        <h3>支払方法</h3>
-            <%= %><br><!--enumの表示方法確認-->
-        <h3>お届け先</h3>
-            <!--<= Order.addresses_i18n[:] %>-->
+        <table>
+            <tbody>
+                <tr>
+                    <td><p><strong>支払方法</strong></p></td>
+                    <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+                </tr>
+                <tr>
+                    <td><p><strong>お届け先</strong></p></td>
+                    <td>
+                        <%= "〒" + @order.postcode %>
+                        <%= @order.address %><br>
+                        <%= @order.name %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<%= form_with model:@order, url: thanx_public_orders_path do |f| %>
+
     <%= f.submit "注文を確定する" %>
 <% end %>

@@ -41,6 +41,7 @@
         <td><%= link_to '削除する', cart_item_path(cart_item.id),  method: :delete, class: "btn btn-sm btn-danger" %></td>
         <!--合計金額をインスタンス変数（@total）に入れてます-->
         <% @total += cart_item.subtotal %>
+        <%#= cart_item.fidden_field :subtotal, value: @total %>
     <% end %>
 
       </tr>
