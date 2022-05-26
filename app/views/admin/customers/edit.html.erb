@@ -1,55 +1,62 @@
-<h2><%= @customer.last_name %><%= @customer. first_name %>の会員情報編集</h2>
-
-<table>
-    <tbody>
-        <%= form_with model:@customer, url: admin_customer_path do |f| %>        
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <h4 class="bg-info text-white d-inline px-4"><%= @customer.last_name %><%= @customer. first_name %>の会員情報編集</h4>
+    </div>
+    <div class="col-md-8 offset-md-2">
+      <table class="table my-5">
+        <tbody>
+          <%= form_with model:@customer, url: admin_customer_path do |f| %>
             <tr>
-                <td><%= f.label :id, "会員ID" %></td>
-                <td colspan="4"><%= @customer.id %></td>
+              <td><%= f.label :id, "会員ID" %></td>
+              <td colspan="4"><%= @customer.id %></td>
             </tr>
             <tr>
-                <td><%= f.label :name, "氏名" %></td>
-                <td>
-                    <%= f.text_field :last_name %>
-                    <%= f.text_field :first_name %>
-                </td>
+              <td><%= f.label :name, "氏名" %></td>
+              <td>
+                <%= f.text_field :last_name %>
+                <%= f.text_field :first_name %>
+              </td>
             </tr>
             <tr>
-                <td><%= f.label :name, "フリガナ" %></td>
-                <td>
-                    <%= f.text_field :last_name_kana %>
-                    <%= f.text_field :first_name_kana %>
-                </td>
+              <td><%= f.label :name, "フリガナ" %></td>
+              <td>
+                <%= f.text_field :last_name_kana %>
+                <%= f.text_field :first_name_kana %>
+              </td>
             </tr>
             <tr>
-                <td><%= f.label :postcode, "郵便番号" %></td>
-                <td><%= f.text_field :postcode %></td>
+              <td><%= f.label :postcode, "郵便番号" %></td>
+              <td><%= f.text_field :postcode %></td>
             </tr>
             <tr>
-                <td><%= f.label :address, "住所" %></td>
-                <td><%= f.text_field :address %></td>
+              <td><%= f.label :address, "住所" %></td>
+              <td><%= f.text_field :address %></td>
             </tr>
             <tr>
-                <td><%= f.label :phone_number, "電話番号" %></td>
-                <td><%= f.text_field :phone_number %></td>
+              <td><%= f.label :phone_number, "電話番号" %></td>
+              <td><%= f.text_field :phone_number %></td>
             </tr>
             <tr>
-                <td><%= f.label :email, "メールアドレス" %></td>
-                <td><%= f.text_field :email %></td>
+              <td><%= f.label :email, "メールアドレス" %></td>
+              <td><%= f.text_field :email %></td>
             </tr>
             <tr>
-                <td><%= f.label :status, "会員ステータス" %></td>
-                <td>
-                    <%= f.radio_button :status, Customer.statuses.key(0) %>
-                    <%= f.label :status, Customer.statuses_i18n[:register] %>
-                    <%= f.radio_button :status, Customer.statuses.key(1) %>
-                    <%= f.label :status, Customer.statuses_i18n[:unregister] %>
-                </td><!-- ラジオボタンで2択にする -->
+              <td><%= f.label :status, "会員ステータス" %></td>
+              <td>
+                <%= f.radio_button :status, Customer.statuses.key(0) %>
+                <%= f.label :status, Customer.statuses_i18n[:register] %>
+                <%= f.radio_button :status, Customer.statuses.key(1) %>
+                <%= f.label :status, Customer.statuses_i18n[:unregister] %>
+              </td><!-- ラジオボタンで2択にする -->
             </tr>
             <tr>
-                <td></td>
-                <td><%= f.submit "変更を保存" %></td>
+              <td></td>
+              <td><%= f.submit "変更を保存", class: "btn btn-success btn-lg" %></td>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
