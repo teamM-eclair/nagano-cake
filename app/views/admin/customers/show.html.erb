@@ -42,7 +42,7 @@
           </tr>
           <tr>
             <td scope="col">会員ステータス</td>
-            <td scope="col"><%= @customers %></td>
+            <td scope="col"><%= Customer.statuses_i18n[@customer.status] %></td>
           </tr>
           <tr>
             <td scope="col"></td>

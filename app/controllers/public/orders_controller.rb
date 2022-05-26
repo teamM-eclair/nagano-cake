@@ -10,13 +10,6 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items
     @customer = current_customer
 
-    # 支払方法---いらない---------------------------------
-    # if params[:order][:payment_method] == "credit_card"
-    #   @payment_method = Order.payment_methods.key(0)
-    # else
-    #   @paymentmethod = Order.payment_methods.key(1)
-    # end
-
     # お届け先
     if params[:order][:shipping_address] == "0"
       @order.postcode = @customer.postcode
@@ -28,25 +21,25 @@ class Public::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     end
-    #新規配送先の場合
-
-
-    # end
-
-    # @order.postcode = current_customer.postcode
-    # @order.address = current_customer.address
-    # @order.name = current_customer.first_name + current_customer.last_name
-
-
   end
 
   def create
     @order = Order.new(order_params)
     # Orderモデルに注文を保存
-    # OrderDetailモデルにカート内商品の情報をもとに保存
     @order.save
-    .save
+    
+    # OrderDetailモデルにカート内商品の情報をもとに保存
+    current_customer.cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cartt_item.item_id
+      @order_detail.amount = cart_item.amount
+      @order_detail.purchase_price = cart_item.item.with_tax_price
+      @order_detail.order_id = @order.id
+      @order_detail.save
+    end
+      
     # カート内商品をすべ削除
+    
     # 購入画面に遷移
     redirect_to thanx_public_orders_path
   end
