@@ -10,7 +10,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items
     @customer = current_customer
-    
+
     # お届け先
         # ご自身の住所の場合
     if params[:order][:shipping_address] == "0"
@@ -30,8 +30,8 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     # Orderモデルに注文を保存
-    @order.save     
-    
+    @order.save
+
     current_customer.cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
       @order_detail.item_id = cart_item.item_id
@@ -40,8 +40,8 @@ class Public::OrdersController < ApplicationController
       @order_detail.order_id = @order.id
       @order_detail.save
     end
-  
-    # @order_detail = OrderDetail.new(order_detail_params) 
+
+    # @order_detail = OrderDetail.new(order_detail_params)
 
     # カート内商品をすべ削除
     current_customer.cart_items.destroy_all # @order.destroy.all?
@@ -54,6 +54,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+    @cart_items = current_customer.cart_item
   end
 
   def show
@@ -66,8 +67,8 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit( :shipping_fee, :bill, :payment_method, :address, :postcode, :name)
   end
-  
+
   # def order_detail_params
-  #   params.require(:order_detail).permit(:payment_method, :address, :postcode, :name)    
+  #   params.require(:order_detail).permit(:payment_method, :address, :postcode, :name)
   # end
 end

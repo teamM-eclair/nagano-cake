@@ -8,6 +8,10 @@ class Public::CustomersController < ApplicationController
   end
 
   def out
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to new_customer_session_path
   end
 
   def edit
