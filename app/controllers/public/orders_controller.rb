@@ -34,7 +34,7 @@ class Public::OrdersController < ApplicationController
     
     current_customer.cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
-      @order_detail.item_id = cartt_item.item_id
+      @order_detail.item_id = cart_item.item_id
       @order_detail.amount = cart_item.amount
       @order_detail.purchase_price = cart_item.item.with_tax_price
       @order_detail.order_id = @order.id
@@ -64,7 +64,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :shipping_fee, :bill, :payment_method, :address, :postcode, :name, :status)
+    params.require(:order).permit( :shipping_fee, :bill, :payment_method, :address, :postcode, :name)
   end
   
   # def order_detail_params
