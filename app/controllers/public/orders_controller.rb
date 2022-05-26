@@ -27,19 +27,19 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     # Orderモデルに注文を保存
     @order.save
-    
+
     # OrderDetailモデルにカート内商品の情報をもとに保存
     current_customer.cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
-      @order_detail.item_id = cartt_item.item_id
+      @order_detail.item_id = cart_item.item_id
       @order_detail.amount = cart_item.amount
       @order_detail.purchase_price = cart_item.item.with_tax_price
       @order_detail.order_id = @order.id
       @order_detail.save
     end
-      
+
     # カート内商品をすべ削除
-    
+
     # 購入画面に遷移
     redirect_to thanx_public_orders_path
   end
@@ -59,6 +59,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :payment_method, :address, :postcode, :name)
+    params.require(:order).permit( :shipping_fee, :bill, :payment_method, :address, :postcode, :name)
   end
 end
