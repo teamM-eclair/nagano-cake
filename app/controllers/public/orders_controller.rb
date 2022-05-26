@@ -24,28 +24,24 @@ class Public::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     end
-
-
-
   end
 
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     # Orderモデルに注文を保存
-    @order.save     
+    @order.save
     
-    current_customer.cart_items.each do |cart_item|
-      
-    # @order_detail = OrderDetail.new(order_detail_params) 
-    
-    
-   
     # OrderDetailモデルにカート内商品の情報をもとに保存
-    
-    
-    
-    
+    current_customer.cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cartt_item.item_id
+      @order_detail.amount = cart_item.amount
+      @order_detail.purchase_price = cart_item.item.with_tax_price
+      @order_detail.order_id = @order.id
+      @order_detail.save
+    end
+      
     # カート内商品をすべ削除
     current_customer.cart_items.destroy_all # @order.destroy.all?
     # 購入画面に遷移

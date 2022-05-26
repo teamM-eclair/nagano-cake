@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <td>会員ステータス</td>
-            <td><%= @customers %></td>
+            <td><%= Customer.statuses_i18n[@customer.status] %></td>
         </tr>
         <tr>
             <td></td>

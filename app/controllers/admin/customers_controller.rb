@@ -5,8 +5,7 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @status = @customer.status
-    @cutomers = Customer.statuses_i18n[:@status]
+    # @status = @customer.status
   end
 
   def edit
