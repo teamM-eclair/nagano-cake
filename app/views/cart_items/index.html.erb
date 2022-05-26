@@ -8,14 +8,15 @@
     <th>小計</th>
     <th></th>
   </thead>
+
   <tbody>
    <% @total = 0 %>
     <% @cart_items.each do |cart_item| %>
       <tr>
         <td>
-          <%= cart_item.item.get_image(100, 100) %>
+          <%= image_tag cart_item.item.get_image(100,100) %>
           <%= cart_item.item.name %>
-          <%= f.hidden_field :name, :value => cart_item.item.name %>
+          <%#= f.hidden_field :name, :value => cart_item.item.name %>
         </td>
         <!--単価（税込）-->
         <td>
@@ -39,10 +40,13 @@
         <td><%= link_to '削除する', cart_item_path(cart_item.id),  method: :delete, class: "btn btn-sm btn-danger" %></td>
         <!--合計金額をインスタンス変数（@total）に入れてます-->
         <% @total += cart_item.subtotal %>
-        <%#= cart_item.fidden_field :subtotal, value: @total %>
     <% end %>
 
       </tr>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/develop
   </tbody>
 </table>
 <%= link_to '買い物を続ける', public_items_path(@customer) %>
