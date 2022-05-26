@@ -45,7 +45,6 @@
                     <tr>
                         <td>請求金額</td>
                         <td><%= 800 + @sum %></td>
-                        <% f.hidden_field :bill, :value => 800 + @sum %>
                     </tr>
                 </tbody>
             </table>
@@ -56,7 +55,9 @@
             <tbody>
                 <tr>
                     <td><p><strong>支払方法</strong></p></td>
-                    <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+                    <td>
+                        <%= Order.payment_methods_i18n[@order.payment_method] %>
+                    </td>
                 </tr>
                 <tr>
                     <td><p><strong>お届け先</strong></p></td>
@@ -64,10 +65,23 @@
                         <%= "〒" + @order.postcode %>
                         <%= @order.address %><br>
                         <%= @order.name %>
+                        
                     </td>
                 </tr>
             </tbody>
         </table>
+        <!-- 請求金額 -->
+        <%= f.hidden_field :bill, :value => 800 + @sum %>
+        <!-- 支払方法 -->
+        <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+        <!--郵便番号-->
+        <%= f.hidden_field :postcode, :value => "〒" + @order.postcode %>
+        <!--住所-->
+        <%= f.hidden_field :address, :value => @order.address %>
+        <!--宛名-->
+        <%= f.hidden_field :name, :value => @order.name %>
+        <!--送料-->
+        <%= f.hidden_field :shipping_fee, :value => 800 %>
     </div>
 </div>
 

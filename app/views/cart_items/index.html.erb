@@ -26,7 +26,7 @@
         <!--数量-->
 
         <td>
-        <%= form_with model:@cart_item,local:true cart_item do |f| %>
+        <%= form_with model: cart_item, local:true do |f| %>
             <%= f.select :amount, *[1..5] %>
             <%= f.submit '変更', class: "btn btn-sm btn-success" %>
         <% end %>
@@ -43,10 +43,7 @@
     <% end %>
 
       </tr>
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/develop
   </tbody>
 </table>
 <%= link_to '買い物を続ける', public_items_path(@customer) %>
