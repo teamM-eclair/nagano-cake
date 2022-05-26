@@ -18,7 +18,7 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    @cart_items = CartItem.find(current_customer.id)
+    @cart_items = CartItem.find(params[:id])
     if @cart_items.update(cart_item_params)
       redirect_to cart_items_path
     else
