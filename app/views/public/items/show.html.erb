@@ -5,7 +5,7 @@
   <p><%= @item.unit_price.to_s(:delimited) %></p>
 
   <%= form_with model:@cart_item,local:true do |f| %>
-    <%= f.hidden_field :item_id.to_s(:delimited), value: @item.id %>
+    <%= f.hidden_field :item_id, value: @item.id %>
     <!--セレクトボックス-->
     <%= f.select :amount, *[1..5] %>
     <%= f.submit 'カートに入れる', class: "btn btn-sm btn-success" %>
