@@ -1,9 +1,8 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-1">
-      <h4 class="bg-info text-white d-inline px-4">商品一覧</h4>
-        <table class='table table-hover table-inverse'>
-        <thead>
+<!--ヘッダー追加する-->
+
+<h2>商品一覧</h2>
+    <table class='table table-hover table-inverse'>
+      <thead>
         <tr>
           <th>商品ID</th>
           <th>商品名</th>
@@ -16,7 +15,11 @@
         <% @items.each do |item| %>
           <tr>
             <td><%= item.id %></td>
-            <td><%= item.name %></td>
+            <td>
+              <%= link_to admin_item_path(item.id) do %>
+                <%= item.name %>
+              <% end %>
+            </td>
             <td><%= item.unit_price.to_s(:delimited) %></td>
             <td><%= item.genre.name %></td>
             <td><%= item.sales_status %></td>
@@ -24,8 +27,5 @@
         <% end %>
       </tbody>
     </table>
-    </div>
-  </div>
-</div>
 
 <%= paginate @items %>

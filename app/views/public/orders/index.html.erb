@@ -21,17 +21,20 @@
           <tr>
             <td><%= order.created_at.strftime('%Y年%m月%d日') %></td>
             <td>
-              〒<%= order.postcode %><br>
+              <%= order.postcode %><br>
               <%= order.address %><br>
               <%= order.name %> 様
             </td>
             <td>
-              <%= order.items.each do |item| %>
-                <%= item.name %>
-              <% end %>
+            <% @total = 0 %>
+            <% @cart_items.each do |cart_item| %>
+              <%= cart_item.item.name %>
+            <% @total += cart_item.subtotal %>
+            <% end %>
             </td>
-            <td><%= addTax(order.items.sum(:unit_price)) %>円</td>
-            <td><%= link_to public_orders_path(order), class: "btn btn-success" do %>表示する
+            <td><%= 800 + @total %>円</td>
+            <td></td>
+            <td><%= link_to public_order_path(order.id), class: "btn btn-success" do %>表示する
                 <% end %>
             </td>
           </tr>
