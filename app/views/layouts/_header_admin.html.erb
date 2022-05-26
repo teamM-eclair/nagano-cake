@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><%= image_tag '/nagano-cake/Nagano-cake-logo.png', alt: 'ロゴでない' %></a>
+      <%= link_to public_root_path,class: "header-logo-letter" do %><%= image_tag('logo.png', :size => "160x90", alt: 'ロゴでない') %><% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,6 +19,13 @@
   </nav>
   <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
 </header>
+
+
+<!--<div class="bg-info clearfix">-->
+<!--  <button type="button" class="btn btn-secondary float-start">行頭揃えボタン</button>-->
+<!--  <div class="clearfix"></div>-->
+<!--  <button type="button" class="btn btn-secondary float-end">行末揃えボタン</button>-->
+<!--</div>-->
