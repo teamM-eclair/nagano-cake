@@ -55,9 +55,7 @@
             <tbody>
                 <tr>
                     <td><p><strong>支払方法</strong></p></td>
-                    <td>
-                        <%= Order.payment_methods_i18n[@order.payment_method] %>
-                    </td>
+                    <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
                 </tr>
                 <tr>
                     <td><p><strong>お届け先</strong></p></td>
