@@ -42,7 +42,13 @@
           </tr>
           <tr>
             <td scope="col">会員ステータス</td>
-            <td scope="col"><%= Customer.statuses_i18n[@customer.status] %></td>
+            <td scope="col">
+              <% if @customer.is_deleted == true %>
+                <p>退会済</p>
+              <% else %>
+                <p>有効</p>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td scope="col"></td>
