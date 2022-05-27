@@ -15,7 +15,7 @@
       <tr>
         <th>配送先</th>
         <td>
-          〒<%= @order.postcode %><br>
+          <%= @order.postcode %><br>
           <%= @order.address %><br>
           <%= @order.name %> 様
         </td>
@@ -70,7 +70,7 @@
             <% end %>
           </td>
           <td>
-            <%= items.unit_price × order_detail.amount %>円
+            <%= items.unit_price * order_detail.amount %>円
           </td>
         </tr>
     </tbody>
