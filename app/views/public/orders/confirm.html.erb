@@ -21,10 +21,10 @@
                                 <%= cart_item.item.name %>
                             </td>
                             <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
-                            <td><%= cart_item.item.with_tax_price %></td>
+                            <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
                                 <td><%= cart_item.amount %></td>
                             <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
-                                <td><%= cart_item.subtotal %></td>
+                                <td><%= cart_item.subtotal.to_s(:delimited) %></td>
                             <% @sum += cart_item.subtotal %> <!-- 要確認 -->
                         <% end %>
                     </tr>
@@ -40,11 +40,11 @@
                     </tr>
                     <tr>
                         <td>商品合計</td>
-                        <td><%= @sum %></td>
+                        <td><%= @sum.to_s(:delimited) %></td>
                     </tr>
                     <tr>
                         <td>請求金額</td>
-                        <td><%= 800 + @sum %></td>
+                        <td><%= (800 + @sum).to_s(:delimited) %></td>
                     </tr>
                 </tbody>
             </table>
@@ -54,11 +54,11 @@
         <table>
             <tbody>
                 <tr>
-                    <td><p><strong>支払方法</strong></p></td>
+                    <td><strong>支払方法</strong></td>
                     <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
                 </tr>
                 <tr>
-                    <td><p><strong>お届け先</strong></p></td>
+                    <td><strong>お届け先</strong></td>
                     <td>
                         <%= "〒" + @order.postcode %>
                         <%= @order.address %><br>
@@ -80,6 +80,8 @@
         <%= f.hidden_field :name, :value => @order.name %>
         <!--送料-->
         <%= f.hidden_field :shipping_fee, :value => 800 %>
+        <!--ステータス-->
+        <%#= f.hidden_field :status, :value => @order.status %>
     </div>
 </div>
 
