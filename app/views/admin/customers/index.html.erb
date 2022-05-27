@@ -26,7 +26,13 @@
                   <% end %>
                 </td>
                 <td><%= customer.email %></td>
-                <td><%= customer.status %></td>
+                <td>
+                  <% if customer.is_deleted == true %>
+                    <p>退会済</p>
+                  <% else %>
+                    <p>有効</p>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>

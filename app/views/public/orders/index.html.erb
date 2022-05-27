@@ -27,7 +27,7 @@
             </td>
             <td>
               <%= order.items.each do |item| %>
-                <%= item.name %>
+                <%= cart_item.item.name %>
               <% end %>
             </td>
             <td><%= addTax(order.items.sum(:unit_price)) %>円</td>

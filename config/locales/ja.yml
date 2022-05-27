@@ -35,8 +35,8 @@ ja: #日本語設定
       sales_status:
         sale: "販売中"
         sold: "販売停止中"
-        
+
   activerecord:
     errors:
       messages:
-        record_invalid: "バリデーションエラー"      
+        record_invalid: "バリデーションエラー"
