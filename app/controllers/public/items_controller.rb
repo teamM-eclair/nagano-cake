@@ -1,5 +1,4 @@
 class Public::ItemsController < ApplicationController
-
   def index
     @items = Item.all
     @item_pages = Item.page(params[:page]).per(8).order(:id)

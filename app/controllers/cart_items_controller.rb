@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_customer!
 # before_action :correct_customer
 
   def create
@@ -35,7 +36,8 @@ class CartItemsController < ApplicationController
   end
 
   def all_destroy
-    current_customer.cart_items.destroy_all
+    @cart_items = current_customer.cart_items
+    @cart_items.destroy_all
     redirect_to cart_items_path
   end
 
