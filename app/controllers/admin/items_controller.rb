@@ -5,9 +5,17 @@ class Admin::ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @genres = Genre.all
   end
 
   def create
+     @item = Item.new(item_params)
+    if @item.save
+      flash[:success] = "新商品を登録しました"
+      redirect_to admin_item_path(@item)
+    else
+      render :new
+    end
   end
 
   def show
