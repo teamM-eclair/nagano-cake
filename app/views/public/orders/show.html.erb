@@ -77,5 +77,8 @@
           <td><%= order_detail.amount %></td>
           <td><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
         </tr>
+      <% end %>
     </tbody>
   </table>
+  </div>
+</div> 
