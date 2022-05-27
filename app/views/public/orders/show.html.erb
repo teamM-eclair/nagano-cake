@@ -72,16 +72,10 @@
     <tbody>
       <% @order_details.each do |order_detail| %>
         <tr>
-          <td><%= item.name %></td>
-          <td><%= item.unit_price %></td>
-          <% @order.order_details.each do |order_detail| %>
-          <td>
-              <%= order_detail.amount %>
-            <% end %>
-          </td>
-          <td>
-            <%= items.unit_price * order_detail.amount %>円
-          </td>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.purchase_price.to_s(:delimited) %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
         </tr>
     </tbody>
   </table>
