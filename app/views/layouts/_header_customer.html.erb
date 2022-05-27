@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <%= link_to public_root_path,class: "header-logo-letter" do %><%= image_tag('logo.png', :size => "160x90", alt: 'ロゴでない') %><% end %>
+      <%= link_to root_path,class: "header-logo-letter" do %><%= image_tag('logo.png', :size => "160x90", alt: 'ロゴでない') %><% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
           ようこそ、<%= current_customer.last_name %>さん！
