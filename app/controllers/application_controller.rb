@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       if resource_or_scope.is_a?(Admin)
           admin_path
       else
-          public_customer_customers_my_page_path(current_customer)
+          root_path
       end
   end
 
