@@ -26,13 +26,13 @@
               <%= order.name %> 様
             </td>
             <td>
-            <% @total = 0 %>
-            <% @cart_items.each do |cart_item| %>
-              <%= cart_item.item.name %>
-            <% @total += cart_item.subtotal %>
+            <%# @total = 0 %>
+            <% order.order_details.each do |order_detail| %>
+              <%= order_detail.item.name %><br>
+            <% @total += order_detail. %>
             <% end %>
             </td>
-            <td><%= 800 + @total %>円</td>
+            <td><%#= 800 + @total %>円</td>
             <td></td>
             <td><%= link_to public_order_path(order.id), class: "btn btn-success" do %>表示する
                 <% end %>
