@@ -51,7 +51,7 @@
       </tr>
       <tr>
         <td>ご請求額</td>
-        <td><%= addTax(@order.items.sum(:unit_price)) + @order.shipping_fee %>円</td>
+        <td><%= (@sum + 800).to_s(:delimited) %></td>
       </tr>
     </tbody>
   </table>
