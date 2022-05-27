@@ -1,4 +1,5 @@
 class Admin::OrderDetailsController < ApplicationController
+  before_action :authenticate_admin!
 
   def update
      @order_detail = OrderDetail.find(params[:id])
@@ -12,7 +13,7 @@ class Admin::OrderDetailsController < ApplicationController
 			
 			# カート内商品すべてが製作完了なら
 		elsif @order.order_details.count ==  @order.order_details.where(product_status: "completion_of_production").count
-			#注文ステータスを3(発送準備中)に更新
+		  #注文ステータスを3(発送準備中)に更新
 			@order.update(status: 3) 
 		end
 		#注文詳細に遷移

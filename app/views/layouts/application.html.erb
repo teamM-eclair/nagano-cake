@@ -11,10 +11,11 @@
   </head>
 
   <body>
-        <% if customer_signed_in? %>
-          <%= render 'layouts/header_customer' %>
-        <% elsif admin_signed_in? %>
+
+        <% if admin_signed_in? %>
           <%= render 'layouts/header_admin' %>
+        <% elsif customer_signed_in? %>
+          <%= render 'layouts/header_customer' %>       
         <% else %>
           <%= render 'layouts/header_logout' %>
         <% end %>
