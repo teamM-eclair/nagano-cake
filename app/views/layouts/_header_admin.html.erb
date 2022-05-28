@@ -1,0 +1,33 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= link_to root_path,class: "header-logo-letter" do %><%= image_tag('logo.png', :size => "170x70", alt: 'ロゴでない') %><% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <!--管理者ログイン時-->
+          <li class="mx-3"><%= link_to '商品一覧', admin_items_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to '会員一覧', admin_customers_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to '注文履歴一覧', admin_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to 'ジャンル一覧', admin_genres_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+        </ul>
+      </div>
+    </div>
+    <form class="form-inline text-right my-2 my-lg-0 mr-auto">
+      <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-rimary my-2 my-sm-0" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </nav>
+</header>
+
+
+<!--<div class="bg-info clearfix">-->
+<!--  <button type="button" class="btn btn-secondary float-start">行頭揃えボタン</button>-->
+<!--  <div class="clearfix"></div>-->
+<!--  <button type="button" class="btn btn-secondary float-end">行末揃えボタン</button>-->
+<!--</div>-->

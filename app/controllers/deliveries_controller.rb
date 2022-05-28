@@ -1,7 +1,8 @@
 class DeliveriesController < ApplicationController
+  before_action :authenticate_customer!
 
   def index
-    @deliveries = Delivery.all
+    @deliveries = current_customer.deliveries
     @delivery = Delivery.new
   end
 
@@ -16,13 +17,14 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  def destroy
-    @delivery.destroy
-    redirect_to deliveries_path
-  end
-
   def edit
     @delivery = Delivery.find(params[:id])
+  end
+
+  def destroy
+    @delivery = Delivery.find(params[:id])
+    @delivery.destroy
+    redirect_to deliveries_path(@delivery)
   end
 
   def update

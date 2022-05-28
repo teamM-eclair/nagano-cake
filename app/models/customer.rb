@@ -5,11 +5,13 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :destroy
+  has_many :deliveries, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
 
-  validates :password,
-    length: { minimum: 6 }
+  #enum is_deleted: { '退会済': true, '有効': false }
 
-  validates :email,
-    uniqueness: true
+  # def active_for_authentication?
+  #   super && (self.is_valid == false)
+  # end
 
 end
