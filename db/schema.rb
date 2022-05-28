@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_101016) do
+ActiveRecord::Schema.define(version: 2022_05_26_093734) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_101016) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_deleted", default: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_101016) do
     t.text "detail"
     t.integer "genre_id"
     t.integer "unit_price"
-    t.integer "sales_status"
+    t.integer "sales_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -110,20 +111,20 @@ ActiveRecord::Schema.define(version: 2022_05_18_101016) do
     t.integer "item_id"
     t.integer "amount"
     t.integer "purchase_price"
-    t.integer "product_status"
+    t.integer "product_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "shipping_fee"
+    t.integer "shipping_fee", default: 800
     t.integer "bill"
-    t.integer "payment_method"
+    t.integer "payment_method", default: 0
     t.text "address"
     t.string "postcode"
     t.string "name"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
