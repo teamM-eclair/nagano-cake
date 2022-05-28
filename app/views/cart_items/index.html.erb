@@ -20,7 +20,7 @@
         </td>
         <!--単価（税込）-->
         <td>
-          <%= cart_item.item.with_tax_price %>
+          <%= cart_item.item.with_tax_price.to_s(:delimited) %>
           <%#= f.hidden_field :with_tax_price, :value => cart_item.item.with_tax_price %>
         </td>
         <!--数量-->
@@ -34,7 +34,7 @@
 
         <!--小計 -->
         <td>
-          <%= cart_item.subtotal %>
+          <%= cart_item.subtotal.to_s(:delimited) %>
         </td>
         <!--削除ボタン-->
         <td><%= link_to '削除する', cart_item_path(cart_item.id),  method: :delete, class: "btn btn-sm btn-danger" %></td>
@@ -53,7 +53,7 @@
   </thead>
   <tbody>
     <!--ここで合計金額を表示させます-->
-    <td><%= @total %></td>
+    <td><%= @total.to_s(:delimited) %></td>
   </tbody>
 </table>
 <%= link_to '情報入力に進む', new_public_order_path %>

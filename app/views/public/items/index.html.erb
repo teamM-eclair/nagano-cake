@@ -4,10 +4,10 @@
 <div>
   <%= link_to public_item_path(item.id) do %>
     <%= image_tag item.get_image(100,100) %>
-    <p><%= item.name %></p>
-
-  <% end %>
-  <p><%= item.unit_price.to_s(:delimited) %></p>
+  <% end %>  
+    <p><strong><%= item.name %></strong></p>
+    
+  <p><strong>¥<%= item.unit_price.to_s(:delimited) %></strong></p>
 </div>
 <% end %>
 
