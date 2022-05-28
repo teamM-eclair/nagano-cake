@@ -16,7 +16,7 @@
           <tr>
             <th class="bg-secondary text-light">配送先</th>
             <td>
-              〒<%= @order.postcode %><br>
+              <%= @order.postcode %><br>
               <%= @order.address %><br>
               <%= @order.name %> 様
             </td>
@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <th class="bg-secondary text-light">配送料</th>
-            <td><%= @order.shipping_fee.to_s(:delimited) %></td>
+            <td><%= @order.shipping_fee.to_s(:delimited) %>円</td>
           </tr>
           <tr>
             <th class="bg-secondary text-light">ご請求額</th>
