@@ -2,8 +2,9 @@
 <%= form_with model:@item, url: admin_item_path, local:true do |f| %>
 
 <div>
-<%= attachment_image_tag(@item, :image, size: "250x180") %>
-<%= f.attachment_field :image, class: " image" %>
+  <%= f.label :image, "商品画像", class: "col-sm-3 control-label" %>
+  <%= f.file_field :image, placeholder: "画像", accept: "image/*" %>
+  <%#= f.file_field :image, class: "image" %>
 </div>
 
 <div class="form-group">
@@ -17,18 +18,22 @@
 
 <div class>
   <%= f.label :"ジャンル", class: "col-sm-3 control-label" %>
-  <%= f.collection_select(:genre_id, @genres, :id, :name, prompt: "-- 選択してください --", class: "col-sm-9 genre_id") %>
+  <%= f.select :genre_id, options_from_collection_for_select(@genre, :id, :name) %><br>
+  <%#= f.collection_select(:genre_id,:id, :name, prompt: "-- 選択してください --", class: "col-sm-9 genre_id") %>
 </div>
 
 <div>
-  <%= f.label :"税抜価格", class: "col-sm-3 control-label" %>
+  <%= f.label :"税込み価格", class: "col-sm-3 control-label" %>
   <%= f.text_field :unit_price, class: "col-sm-3 form-control-static unit_price" %>円
 </div>
 
 <div>
   <%= f.label :"販売ステータス", class: "col-sm-3 control-label" %>
-  <!--ステータスの記述-->
+  <%= f.radio_button :sales_status, "sale" %>
+  <%= f.label :sales_status, "販売中" %>
+  <%= f.radio_button :sales_status, "sold" %>
+  <%= f.label :sales_status, "販売停止中" %>
 </div>
 
-<%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
+<%= f.submit "変更を保存", class: "btn btn-success pull-right" %>
 <% end %>

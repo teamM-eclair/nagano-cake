@@ -2,10 +2,12 @@
 
 <% @items.each do |item| %>
 <div>
-  <%= image_tag item.get_image(100,100) %>
-  <%= link_to public_item_path(item.id) %>
-  <p><%= item.name %></p>
-  <p><%= item.unit_price %></p>
+  <%= link_to public_item_path(item.id) do %>
+    <%= image_tag item.get_image(100,100) %>
+  <% end %>  
+    <p><strong><%= item.name %></strong></p>
+    
+  <p><strong>¥<%= item.unit_price.to_s(:delimited) %></strong></p>
 </div>
 <% end %>
 
