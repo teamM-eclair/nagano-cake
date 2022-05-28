@@ -19,7 +19,7 @@
           </tr>
           <tr>
             <td><strong>注文日</strong></td>
-            <td><%= order[:created_at].strftime("%Y/%m/%d") %></td>
+            <td><%= @order[:created_at].strftime("%Y/%m/%d") %></td>
           </tr>
           <tr>
             <td><strong>配送先</strong></td>
@@ -52,7 +52,7 @@
   <div class="row">
     <div class="col-8 offset-1">
       <!--<table  table border="0" style='table table-hover table-inverse'>-->
-      <table class='table table-hover table-inverse my-5'>
+      <table class='table table-hover table-inverse my-1'>
         <thead class="table-info">
           <tr>
             <th>商品名</th>
@@ -78,15 +78,15 @@
                     <%#= f.select :product_status, options_from_collection_for_select(item, :id, :product_status) %>
                   </td>
                   <td><%= f.submit '更新', class: "btn btn-sm btn-success" %></td>
-                <% end %> 
+                <% end %>
               </tr>
             <% @sum += order_detail.purchase_price * order_detail.amount %>
             <% end %>
         </tbody>
       </table>
     </div>
-    <div class="col-2 offset-1">
-      <table class="table table-borderless table-sm">
+    <div class="col-3">
+      <table class="table table-borderless table-sm mt-5">
         <tr>
           <td><strong>商品合計</strong></td>
           <td><%= @sum.to_s(:delimited) %>円</td>
