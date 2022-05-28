@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8 offset-1">
-    <h4 class="bg-secondary text-white d-inline px-4">注文履歴一覧</h4>
+      <h4 class="bg-secondary text-white d-inline px-4">注文履歴一覧</h4>
+    </div>
   </div>
   <div class="row">
     <div class="col-12 offset-1">
@@ -31,7 +32,7 @@
                 <% end %>
               </td>
               <td><%= addTax(order.items.sum(:unit_price)) %>円</td>
-              <td><%= link_to public_orders_path(order), class: "btn btn-info" do %>表示する
+              <td><%= link_to public_orders_path(order), class: "btn btn-info" do %>表示する<% end %></td>
             </tr>
           <% end %>
         </tbody>
