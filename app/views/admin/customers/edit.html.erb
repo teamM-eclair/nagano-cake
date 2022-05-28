@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-1">
+    <div class="col-8 offset-1">
       <h4 class="bg-info text-white d-inline px-4"><%= @customer.last_name %><%= @customer. first_name %>の会員情報編集</h4>
     </div>
-    <div class="col-md-8 offset-md-2">
+    <div class="col-8 offset-2">
       <table class="table my-5">
         <tbody>
           <%= form_with model:@customer, url: admin_customer_path(@customer.id) do |f| %>
