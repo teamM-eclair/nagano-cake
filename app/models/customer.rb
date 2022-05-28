@@ -8,9 +8,10 @@ class Customer < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
-  validates :email,
-    uniqueness: true
+  #enum is_deleted: { '退会済': true, '有効': false }
 
-  enum status: { register: 0, unregister: 1 }
+  # def active_for_authentication?
+  #   super && (self.is_valid == false)
+  # end
 
 end

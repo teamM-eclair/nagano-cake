@@ -3,6 +3,7 @@
     <div class="col-8 offset-1">
       <h4 class="bg-info text-white d-inline px-4">注文履歴詳細</h4>
     </div>
+<<<<<<< HEAD
   </div>
   <div class="row">
     <div class="col-8">
@@ -39,6 +40,45 @@
             </td>
           </tr>
         </tbody>
+=======
+    <div class="col-md-8 offset-md-2">
+      <table class="table my-5">
+        <tr>
+          <td><strong>購入者</strong></td>
+          <td>
+            <%= link_to admin_customer_path(@order.customer) do %>
+              <%= @order.customer.last_name %>
+              <%= @order.customer.first_name %>
+            <% end %>
+          </td>
+        </tr>  
+        <tr>
+          <td><strong>注文日</strong></td>
+          <td><%= @order[:created_at].strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <td><strong>配送先</strong></td>
+          <td>
+            <%= @order.postcode %>
+            <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>支払方法</strong></td>
+          <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+        </tr>
+        <tr>
+          <td><strong>注文ステータス</strong></td>
+          <td><!--注文ステータス セレクトボックス-->
+            <%= form_with model: @order, url: admin_order_path, local:true do |f| %>
+              <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+              <%#= f.select :status, options_from_collection_for_select(@order, :id, :status) %>
+              <%= f.submit '更新', class: "btn btn-sm btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+>>>>>>> origin/develop
       </table>
     </div>
   </div>
@@ -46,6 +86,7 @@
   <div class="row">
     <div class="col-8 offset-1">
       <!--<table  table border="0" style='table table-hover table-inverse'>-->
+<<<<<<< HEAD
       <table class='table table-hover table-inverse my-5'>
         <thead class="table-info">
           <tr>
@@ -91,6 +132,64 @@
           <td><strong><%= subtotal(@cart_items.sum(:with_tax_price)) + @order.shipping_fee %>円</strong></td>
         </tr>
       </table>
+=======
+      <div class="table my-5">
+        <table class='table table-hover table-inverse my-5'>
+          <thead class="table-info">
+            <tr>
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>製作ステータス</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sum = 0 %>
+            <% @order_details.each do |order_detail| %>
+              <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.purchase_price.to_s(:delimited) %></td>
+                <td><%= order_detail.amount %></td>
+                <td><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
+                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), local:true do |f| %>
+                  <!--製作ステータス セレクトボックス-->
+                  <td>
+                    <%= f.select :product_status, OrderDetail.product_statuses.keys.map {|k| [I18n.t("enums.order_detail.product_status.#{k}"), k]} %>
+                    <%#= f.select :product_status, options_from_collection_for_select(item, :id, :product_status) %>
+                  </td>
+                  <td><%= f.submit '更新', class: "btn btn-sm btn-success" %></td>
+                <% end %> 
+              </tr>
+            <% @sum += order_detail.purchase_price * order_detail.amount %>
+            <% end %>
+            <%# end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+    <div class="row-pull-right">
+      <div class="col-md-3 offset-md-8">
+        <table class="table table-striped">
+          <tr>
+            <td><strong>商品合計</strong></td>
+            <td><%= @sum.to_s(:delimited) %>円</td>
+          </tr>  
+          <tr>
+            <td><strong>送料</strong></td>
+            <td><%= 800.to_s(:delimited) %>円</td><!--@order.shipping_feeデフォ値をmigrate_fileに -->
+          </tr>  
+          <tr>
+            <td><strong>請求金額合計</strong></td>
+            <td><strong><%= (@sum + 800).to_s(:delimited) %>円</strong></td>
+          </tr>
+        </table>
+      </div>
+>>>>>>> origin/develop
     </div>
   </div>
 </div>

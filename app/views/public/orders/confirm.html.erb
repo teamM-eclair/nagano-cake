@@ -4,6 +4,7 @@
   </div>
   <%= form_with model:@order, url: public_orders_path do |f| %>
     <div class="row">
+<<<<<<< HEAD
       <div class="col-9">
         <table class='table table-bordered my-4'>
           <thead class="bg-secondary text-light">
@@ -31,6 +32,73 @@
             </tr>
             <% end %>
           </tbody>
+=======
+        <div class="col-md-8">
+            <table class='table table-hover table-inverse'>
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>単価(税込)</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% @sum = 0 %>
+                        <% @cart_items.each do |cart_item| %>
+                    <tr>
+                            <td>
+                                <%= image_tag cart_item.item.get_image(20,20) %>
+                                <%= cart_item.item.name %>
+                            </td>
+                            <!-- itemモデルで定義で右が下になる　(cart_item.item.unit_price * 1.1).floor -->
+                            <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+                                <td><%= cart_item.amount %></td>
+                            <!-- 小計を使うモデル(今回はOrderモデル)で定義し　右が下になる(cart_item.item.unit_price * 1.1).floor * cart_item.item.amount -->
+                                <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+                            <% @sum += cart_item.subtotal %> <!-- 要確認 -->
+                        <% end %>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3 offset-md-1">
+            <table class='table table-hover table-inverse'>
+                <tbody>
+                    <tr>
+                        <td>送料</td>
+                        <td>800</td>
+                    </tr>
+                    <tr>
+                        <td>商品合計</td>
+                        <td><%= @sum.to_s(:delimited) %></td>
+                    </tr>
+                    <tr>
+                        <td>請求金額</td>
+                        <td><%= (800 + @sum).to_s(:delimited) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>支払方法</strong></td>
+                    <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+                </tr>
+                <tr>
+                    <td><strong>お届け先</strong></td>
+                    <td>
+                        <%= "〒" + @order.postcode %>
+                        <%= @order.address %><br>
+                        <%= @order.name %>
+                        
+                    </td>
+                </tr>
+            </tbody>
+>>>>>>> origin/develop
         </table>
       </div>
       <div class="col-3">

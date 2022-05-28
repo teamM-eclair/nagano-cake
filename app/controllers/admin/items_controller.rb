@@ -1,13 +1,23 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @items = Item.page(params[:page])
   end
 
   def new
     @item = Item.new
+    @genres = Genre.all
   end
 
   def create
+     @item = Item.new(item_params)
+    if @item.save
+      flash[:success] = "新商品を登録しました"
+      redirect_to admin_item_path(@item)
+    else
+      render :new
+    end
   end
 
   def show
