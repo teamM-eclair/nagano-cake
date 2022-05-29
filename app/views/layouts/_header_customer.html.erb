@@ -1,0 +1,27 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= link_to root_path,class: "header-logo-letter" do %><%= image_tag('logo.png', :size => "170x70", alt: 'ロゴでない') %><% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          ようこそ、<%= current_customer.last_name %>さん！
+        </span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <!--ログイン時-->
+          <li class="mx-3"><%= link_to 'マイページ', public_customer_customers_my_page_path(current_customer), class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to '商品一覧', public_items_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to 'カート', cart_items_path, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+          <li class="mx-3"><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'btn btn-outline-secondary nav-link text-dark' %></li>
+        </ul>
+      </div>
+    </div>
+    <form class="form-inline text-right my-2 my-lg-0 mr-auto">
+      <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-rimary my-2 my-sm-0" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </nav>
+</header>

@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 offset-1">
+      <h4 class="bg-secondary text-white d-inline px-4">注文情報入力<h4>
+    </div>
+    <div class="col-12">
+      <h5><strong>支払方法</strong></h5>
+      <%= form_with model:@order, url: confirm_public_orders_path do |f| %>
+      <!-- Orderモデルに定義した数値に対応した文字列の呼び出し(なぽ) -->
+      <div class="ml-3">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <!-- config/locales/ja.ymlに定義した英語に対応した日本語の呼び出し(なぽ)-->
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+      </div>
+      <div class="ml-3">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
+      </div>
+      <h5><strong>お届け先</strong></h5>
+        <div class="ml-3">
+          <%= f.radio_button :shipping_address, "0" %>
+          <%= f.label :address, "ご自身の住所" %>
+        </div>
+        <div class="ml-5">
+          <%= "〒" %><%= @customer.postcode %>
+          <%= @customer.address %>
+        </div>
+        <div class="ml-5">
+          <%= @customer.last_name %>
+          <%= @customer.first_name %>
+        </div>
+        <div class="ml-3">
+          <%= f.radio_button :shipping_address, "1" %>
+          <%= f.label :address, "登録済みの住所から選択" %>
+          <div class="ml-4">
+            <%= f.select :address_id, options_from_collection_for_select(@delivery, :id, :address_display) %>
+          </div>
+        </div>
+        <div class="ml-3">
+          <%= f.radio_button :shipping_address, "3" %>
+          <%= f.label :address, "新しいお届け先" %>
+        </div>
+        <table class="ml-5">
+          <tbody>
+            <tr>
+              <td><%= f.label :postcode, "郵便番号(ハイフンなし)" %></td>
+              <td><%= f.text_field :postcode %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :address, "住所" %></td>
+              <td><%= f.text_field :address %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :name, "宛名" %></td>
+              <td><%= f.text_field :name %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 offset-5">
+        <%= f.submit "確認画面へ進む", class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
